@@ -24,6 +24,7 @@ export default {
   data(){
     return{
       inputData: '',
+      // inputDataArr: []
     }
   },
   methods:{
@@ -49,7 +50,7 @@ export default {
     margin: 0 0 30px 30px;
     outline: none;
     border-radius: 5px;
-    background-color: #eee;
+    background-color: #888;
     font-size: 15px;
   }
   .left{
@@ -58,7 +59,6 @@ export default {
     top: 50px;
     width: 300px;
     height: 600px;
-    background-color: #888;
-    color: #fff;
+    background-color: #eee;
   }
 </style>

@@ -9,7 +9,6 @@
     <div>
       <button @click="reverseItemData" class="btn-style">点此可将数据的上下顺序进行翻转</button>
     </div>
-    <div class="left">aside-showData</div>
     <router-view/>
   </div>
 </template>
@@ -24,6 +23,7 @@ export default {
   data(){
     return{
       inputData: '',
+      // inputDataArr: []
     }
   },
   methods:{
@@ -51,14 +51,5 @@ export default {
     border-radius: 5px;
     background-color: #eee;
     font-size: 15px;
-  }
-  .left{
-    position: absolute;
-    left: 20px;
-    top: 50px;
-    width: 300px;
-    height: 600px;
-    background-color: #888;
-    color: #fff;
   }
 </style>

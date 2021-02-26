@@ -17,11 +17,11 @@ const routes = [
     component: Home,
     children:[
       {
-        path: 'showData',
+        path: '/showData',
         component: ShowData
       },
       {
-        path: 'reverseShowData',
+        path: '/reverseShowData',
         component: ReverseShowData
       }
     ]

@@ -1,16 +1,12 @@
 <template>
   <div class="home">
-    <h4>data-input</h4>
-    <input type="text" v-model="inputData" 
-      placeholder="请输入" 
-      class="input-style"
-      onmouseover="this.select()">
+    <h4>这是 home 页</h4>
+    <input type="text" v-model="inputData" placeholder="请输入" class="input-style">
     <button @click="btnclick" class="btn-style">提交</button>
-    <div>
-      <button @click="reverseItemData" class="btn-style">点此可将数据的上下顺序进行翻转</button>
+    <button @click="reverseItemData">点此可将数据的顺序进行翻转</button>
+    <div class="show-data">
+      <p class="p" v-for="(item) in inputDataArr" :key="item">{{item}}</p>
     </div>
-    <div class="left">aside-showData</div>
-    <router-view/>
   </div>
 </template>
 
@@ -24,15 +20,15 @@ export default {
   data(){
     return{
       inputData: '',
+      inputDataArr: []
     }
   },
   methods:{
     btnclick() {
-      this.$store.commit('addData',this.inputData);
-      this.$router.push('/home/showData');
-    },
-    reverseItemData(){
-      this.$router.push('/home/reverseShowData');
+      // this.$router.push('/about');
+      console.log(this.inputData);
+      // this.$el.querySelector('.p').innerHTML = this.inputData;
+      this.inputDataArr.push(this.inputData);
     }
   }
 }
@@ -46,13 +42,11 @@ export default {
     height: 25px;
   }
   .btn-style{
-    margin: 0 0 30px 30px;
     outline: none;
     border-radius: 5px;
-    background-color: #eee;
-    font-size: 15px;
+    background-color: #ccc;
   }
-  .left{
+  .show-data{
     position: absolute;
     left: 20px;
     top: 50px;

@@ -3,25 +3,22 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import ShowData from '../views/ShowData.vue'
 import ReverseShowData from '../views/ReverseShowData.vue'
+import { component } from 'vue/types/umd'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    redirect: '/home'
-  },
-  {
-    path: '/home',
     name: 'Home',
     component: Home,
     children:[
       {
-        path: 'showData',
+        path: '/showData',
         component: ShowData
       },
       {
-        path: 'reverseShowData',
+        path: '/reverseShowData',
         component: ReverseShowData
       }
     ]

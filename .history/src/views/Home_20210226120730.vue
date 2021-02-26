@@ -24,15 +24,16 @@ export default {
   data(){
     return{
       inputData: '',
+      // inputDataArr: []
     }
   },
   methods:{
     btnclick() {
       this.$store.commit('addData',this.inputData);
-      this.$router.push('/home/showData');
+      this.$router.push('showData');
     },
     reverseItemData(){
-      this.$router.push('/home/reverseShowData');
+      this.$router.push('reverseShowData');
     }
   }
 }
@@ -53,12 +54,6 @@ export default {
     font-size: 15px;
   }
   .left{
-    position: absolute;
-    left: 20px;
-    top: 50px;
-    width: 300px;
-    height: 600px;
-    background-color: #888;
-    color: #fff;
+
   }
 </style>

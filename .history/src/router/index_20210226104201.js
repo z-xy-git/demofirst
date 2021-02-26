@@ -9,22 +9,12 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/home'
-  },
-  {
-    path: '/home',
     name: 'Home',
-    component: Home,
-    children:[
-      {
-        path: 'showData',
-        component: ShowData
-      },
-      {
-        path: 'reverseShowData',
-        component: ReverseShowData
-      }
-    ]
+    components: {
+      default: ShowData,
+      a: ShowData,
+      b: ReverseShowData
+    }
   },
   // {
     // path: '/showData',

@@ -24,15 +24,16 @@ export default {
   data(){
     return{
       inputData: '',
+      // inputDataArr: []
     }
   },
   methods:{
     btnclick() {
       this.$store.commit('addData',this.inputData);
-      this.$router.push('/home/showData');
+      this.$router.push('/showData');
     },
     reverseItemData(){
-      this.$router.push('/home/reverseShowData');
+      this.$router.push('/reverseShowData');
     }
   }
 }
