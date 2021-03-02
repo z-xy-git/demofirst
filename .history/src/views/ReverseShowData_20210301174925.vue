@@ -1,9 +1,9 @@
 <template>
   <div class="show-data">
     <ul class="data-ul">
-      <li v-for="(item, index) in dataArr" :key="index">
+      <li v-for="(item, index) in reverseDataArr" :key="index">
         <span class="li-text">{{item}}</span>
-        <a href="javascript::0" class="li-icon" @click="deleteClick(index)"></a>
+        <i class="li-icon"></i>
       </li>
     </ul>
   </div>
@@ -13,13 +13,12 @@
 import {mapGetters} from 'vuex'
 
 export default {
-  name:'ShowData',
+  name:'ReverseShowData',
   computed:{
-    ...mapGetters(['dataArr'])
-  },
-  methods:{
-    deleteClick(index){
-      this.$store.commit('deleteItemData',index);
+    ...mapGetters(['dataArr']),
+    reverseDataArr(){
+      let data = JSON.parse(JSON.stringify(this.dataArr))
+      return data.reverse();
     }
   }
 }
@@ -38,7 +37,7 @@ export default {
 .data-ul{
   width: 100%;
   height: 100%;
-}
+  }
 .data-ul li{
   position: relative;
   display: flex;
@@ -70,16 +69,4 @@ export default {
 .data-ul li:hover .li-icon{
   visibility: visible;
 }
-.data-ul a:hover{
-  cursor: pointer;
-}
-    /* .show-data p {
-      width: 75%;
-      text-align: center;
-      height: 25px;
-      line-height: 25px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    } */
 </style>

@@ -3,7 +3,7 @@
     <ul class="data-ul">
       <li v-for="(item, index) in dataArr" :key="index">
         <span class="li-text">{{item}}</span>
-        <a href="javascript::0" class="li-icon" @click="deleteClick(index)"></a>
+        <i class="li-icon"></i>
       </li>
     </ul>
   </div>
@@ -16,11 +16,6 @@ export default {
   name:'ShowData',
   computed:{
     ...mapGetters(['dataArr'])
-  },
-  methods:{
-    deleteClick(index){
-      this.$store.commit('deleteItemData',index);
-    }
   }
 }
 </script>
@@ -70,7 +65,7 @@ export default {
 .data-ul li:hover .li-icon{
   visibility: visible;
 }
-.data-ul a:hover{
+.data-ul .li-icon:focus{
   cursor: pointer;
 }
     /* .show-data p {

@@ -3,7 +3,7 @@
     <ul class="data-ul">
       <li v-for="(item, index) in dataArr" :key="index">
         <span class="li-text">{{item}}</span>
-        <a href="javascript::0" class="li-icon" @click="deleteClick(index)"></a>
+        <a href="javascript::0" class="li-icon" @click="deleteClick(index)"><i></i></a>
       </li>
     </ul>
   </div>

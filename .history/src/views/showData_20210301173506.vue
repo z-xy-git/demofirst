@@ -2,8 +2,8 @@
   <div class="show-data">
     <ul class="data-ul">
       <li v-for="(item, index) in dataArr" :key="index">
-        <span class="li-text">{{item}}</span>
-        <a href="javascript::0" class="li-icon" @click="deleteClick(index)"></a>
+        {{item}}
+        <i class="li-icon"></i>
       </li>
     </ul>
   </div>
@@ -16,11 +16,6 @@ export default {
   name:'ShowData',
   computed:{
     ...mapGetters(['dataArr'])
-  },
-  methods:{
-    deleteClick(index){
-      this.$store.commit('deleteItemData',index);
-    }
   }
 }
 </script>
@@ -40,7 +35,6 @@ export default {
   height: 100%;
 }
 .data-ul li{
-  position: relative;
   display: flex;
   align-items: center;
   list-style: none;
@@ -51,27 +45,16 @@ export default {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.data-ul .li-text{
-  text-indent: 25px;
+.data-ul li:hover{
+  background-color: rgba(255, 255, 255, 0.7)
 }
 .data-ul .li-icon{
-  position: absolute;
-  right: 10px;
+  /* float: right; */
+  /* display: block; */
   width: 20px;
   height: 20px;
   background: url('../assets/cancel_close_delete.png') no-repeat;
   background-size: 18px;
-  opacity: 0.5;
-  visibility: hidden;
-}
-.data-ul li:hover{
-  background-color: rgba(255, 255, 255, 0.7);
-}
-.data-ul li:hover .li-icon{
-  visibility: visible;
-}
-.data-ul a:hover{
-  cursor: pointer;
 }
     /* .show-data p {
       width: 75%;
