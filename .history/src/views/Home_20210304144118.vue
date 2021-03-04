@@ -36,7 +36,7 @@ export default {
       inputData: '',
       inputDataArr: [],
       isgoReverse: true,
-      arr: [],
+      arr: []
     }
   },
   methods:{
@@ -44,9 +44,17 @@ export default {
     onChange(time,timeString) {
       this.arr.push(timeString);
     },
-    btnclick() {      
+    btnclick() {
       this.inputDataArr.push({value: this.inputData, time: this.arr[this.arr.length - 1]});
-      this.inputDataArr.length <= 1 ? this.$store.commit('addData',this.inputDataArr) : this.dataSort(this.inputDataArr);
+      for(item in this.inputDataArr){
+        if(item.time) return;
+        item.time = moment().format('LTS');
+      }
+      if(this.inputDataArr.length <= 1){
+        this.$store.commit('addData',this.inputDataArr);
+      }else{
+        this.dataSort(this.inputDataArr);        
+      }
       this.$store.commit('addData',this.inputDataArr);
       this.$router.push('/home/showData'); 
     },
@@ -59,7 +67,6 @@ export default {
         this.isgoReverse = true;
       }
     },
-    // 根据提交时间排序    
     dataSort(arr){
       for(let i = arr.length - 1; i > 0; i--){
         if(parseInt(arr[i].time.replace(/:/g, "")) < parseInt(arr[i-1].time.replace(/:/g, ""))){

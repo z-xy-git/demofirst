@@ -34,21 +34,22 @@ export default {
   data(){
     return{
       inputData: '',
-      inputDataArr: [],
       isgoReverse: true,
-      arr: [],
+      arr: []
     }
   },
   methods:{
     moment,
     onChange(time,timeString) {
       this.arr.push(timeString);
+      // console.log(timeString);
     },
-    btnclick() {      
-      this.inputDataArr.push({value: this.inputData, time: this.arr[this.arr.length - 1]});
-      this.inputDataArr.length <= 1 ? this.$store.commit('addData',this.inputDataArr) : this.dataSort(this.inputDataArr);
-      this.$store.commit('addData',this.inputDataArr);
+    btnclick() {
+      console.log(this.arr);
+      this.$store.commit('addData', {value: this.inputData, time: this.arr[this.arr.length - 1]});
       this.$router.push('/home/showData'); 
+      console.log(this.$store.state.dataArr);
+      // console.log(this.dataSort(this.$store.state.dataArr));
     },
     reverseItemData(){
       if(this.isgoReverse){
@@ -59,19 +60,16 @@ export default {
         this.isgoReverse = true;
       }
     },
-    // 根据提交时间排序    
-    dataSort(arr){
-      for(let i = arr.length - 1; i > 0; i--){
-        if(parseInt(arr[i].time.replace(/:/g, "")) < parseInt(arr[i-1].time.replace(/:/g, ""))){
-          let temp = arr[i];
-          arr[i] = arr[i-1];
-          arr[i-1] = temp;
-        }else{
-          return arr;
-        }
-      }
-      return arr;
-    }
+    // dataSort(arr){
+    //   for(let i = 0; i < arr.length; i++){
+    //     if(arr[i].time > arr[i+1].time){
+    //       let temp = arr[i].time;
+    //       arr[i].time = arr[i+1].time;
+    //       arr[i+1].time = temp;
+    //     }
+    //   }
+    //   return arr;
+    // }
   }
 }
 </script>

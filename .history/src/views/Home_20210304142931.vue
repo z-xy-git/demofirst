@@ -36,7 +36,7 @@ export default {
       inputData: '',
       inputDataArr: [],
       isgoReverse: true,
-      arr: [],
+      arr: []
     }
   },
   methods:{
@@ -44,10 +44,26 @@ export default {
     onChange(time,timeString) {
       this.arr.push(timeString);
     },
-    btnclick() {      
+    btnclick() {
       this.inputDataArr.push({value: this.inputData, time: this.arr[this.arr.length - 1]});
-      this.inputDataArr.length <= 1 ? this.$store.commit('addData',this.inputDataArr) : this.dataSort(this.inputDataArr);
+      if(this.inputDataArr.length <= 1){
+        this.$store.commit('addData',this.inputDataArr);
+      }else{
+        this.dataSort(this.inputDataArr);
+        // for(let i = this.inputDataArr.length - 1; i > 0; i--){        
+        //   if(parseInt(this.inputDataArr[i].time.replace(/:/g, "")) < parseInt(this.inputDataArr[i-1].time.replace(/:/g, ""))){
+        //     let temp = this.inputDataArr[i];
+        //     this.inputDataArr[i] = this.inputDataArr[i-1];
+        //     this.inputDataArr[i-1] = temp;
+        //   }else{
+        //     return this.inputDataArr;
+        //   }
+        // }
+      }
       this.$store.commit('addData',this.inputDataArr);
+
+      // console.log(this.arr);
+      // this.$store.commit('addData', {value: this.inputData, time: this.arr[this.arr.length - 1]});
       this.$router.push('/home/showData'); 
     },
     reverseItemData(){
@@ -59,7 +75,6 @@ export default {
         this.isgoReverse = true;
       }
     },
-    // 根据提交时间排序    
     dataSort(arr){
       for(let i = arr.length - 1; i > 0; i--){
         if(parseInt(arr[i].time.replace(/:/g, "")) < parseInt(arr[i-1].time.replace(/:/g, ""))){

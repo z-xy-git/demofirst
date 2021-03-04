@@ -49,6 +49,7 @@ export default {
       this.inputDataArr.length <= 1 ? this.$store.commit('addData',this.inputDataArr) : this.dataSort(this.inputDataArr);
       this.$store.commit('addData',this.inputDataArr);
       this.$router.push('/home/showData'); 
+      }
     },
     reverseItemData(){
       if(this.isgoReverse){

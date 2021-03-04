@@ -13,7 +13,7 @@
           class="input-style"
           onmouseover="this.select()">
         <span>选择时间：</span>
-        <a-time-picker :default-open-value="moment(moment().format('LTS'), 'HH:mm:ss')" @change="onChange" :use12Hours=false />
+        <a-time-picker :default-open-value="moment(moment().format('LTS'), 'HH:mm:ss')" @change="onChange" :use12Hours=false @click="sectTime"/>
         <!-- <a-time-picker :default-value="moment(moment().format('LTS'),'HH:mm:ss')" v-model="value" /> -->
         <div><button @click="btnclick" class="btn-style">提交</button></div>
       </div> 
@@ -37,6 +37,8 @@ export default {
       inputDataArr: [],
       isgoReverse: true,
       arr: [],
+      isSectTime: false,
+      isShowDiago: false
     }
   },
   methods:{
@@ -44,11 +46,20 @@ export default {
     onChange(time,timeString) {
       this.arr.push(timeString);
     },
-    btnclick() {      
+    btnclick() {
+      if(this.isSectTime){
       this.inputDataArr.push({value: this.inputData, time: this.arr[this.arr.length - 1]});
-      this.inputDataArr.length <= 1 ? this.$store.commit('addData',this.inputDataArr) : this.dataSort(this.inputDataArr);
+      if(this.inputDataArr.length <= 1){
+        this.$store.commit('addData',this.inputDataArr);
+      }else{
+        this.dataSort(this.inputDataArr);        
+      }
       this.$store.commit('addData',this.inputDataArr);
       this.$router.push('/home/showData'); 
+      }else{
+        this.isShowDiago = true;
+        console.log(this.isShowDiago);        
+      }
     },
     reverseItemData(){
       if(this.isgoReverse){
@@ -59,7 +70,9 @@ export default {
         this.isgoReverse = true;
       }
     },
-    // 根据提交时间排序    
+    sectTime(){
+      this.isSectTime = true;
+    },
     dataSort(arr){
       for(let i = arr.length - 1; i > 0; i--){
         if(parseInt(arr[i].time.replace(/:/g, "")) < parseInt(arr[i-1].time.replace(/:/g, ""))){

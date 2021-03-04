@@ -1,7 +1,7 @@
 <template>
   <div class="show-data">
     <ul class="data-ul">
-      <li v-for="(item, index) in reverseDataArr" :key="index">
+      <li v-for="(item, index) in sortData" :key="index">
         <span class="li-text">{{item.value}}</span>
         <span class="li-time">{{item.time}}</span>
         <a href="javascript:;" class="li-icon" @click="deleteClick(index)"></a>
@@ -14,20 +14,38 @@
 import {mapGetters} from 'vuex'
 
 export default {
-  name:'ReverseShowData',
+  name:'ShowData',
   computed:{
     ...mapGetters(['dataArr']),
-    reverseDataArr(){
-      let data = JSON.parse(JSON.stringify(this.dataArr));
-      return data.reverse();
+    sortData(){
+      let arr = JSON.parse(JSON.stringify(this.dataArr));
+      for(let i = 0; i < arr.length; i++){
+        if(arr[i].time > arr[i+1].time){
+          let temp = arr[i].time;
+          arr[i].time = arr[i+1].time;
+          arr[i+1].time = temp;
+        }
+      }
+      return arr;
     }
   },
   methods:{
-    deleteClick(index){ 
-      this.dataArr.splice(this.dataArr.length - index - 1, 1);
-    }
-  }
-}
+    deleteClick(index){
+      this.dataArr.splice(index,1);
+    },
+    dataSort(arr){
+      for(let i = 0; i < arr.length; i++){
+        if(arr[i].time > arr[i+1].time){
+          let temp = arr[i].time;
+          arr[i].time = arr[i+1].time;
+          arr[i+1].time = temp;
+        }
+      }
+      return arr;
+    },
+    
+  },
+}  
 </script>
 
 <style scoped>
@@ -44,7 +62,7 @@ export default {
   width: 100%;
   height: 100%;
   overflow: auto;
-  }
+}
 .data-ul li{
   position: relative;
   display: flex;
@@ -61,19 +79,20 @@ export default {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  /* background-color: #992; */
 }
 .data-ul .li-time{
   margin-left: 5px;
   font-size: 12px;
-  color: #aaa;
+  color: #bbb;
 }
 .data-ul .li-icon{
   position: absolute;
   right: 10px;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   background: url('../assets/cancel_close_delete.png') no-repeat;
-  background-size: 18px;
+  background-size: 16px;
   opacity: 0.5;
   visibility: hidden;
 }
@@ -86,4 +105,13 @@ export default {
 .data-ul a:hover{
   cursor: pointer;
 }
+    /* .show-data p {
+      width: 75%;
+      text-align: center;
+      height: 25px;
+      line-height: 25px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    } */
 </style>
