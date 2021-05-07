@@ -3,6 +3,13 @@
     <router-view/>
   </div>
 </template>
+<script>
+export default {
+  created(){
+    console.log('App Created...')
+  }
+}
+</script>
 
 <style>
 #app {
